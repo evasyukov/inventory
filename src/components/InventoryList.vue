@@ -1,17 +1,21 @@
 <template>
-  <div class="bottom-panel"></div>
+<div class="inventory-list">
+
+</div>
+
 </template>
 
 <script lang="ts">
 export default {
-  name: "BottomPanel",
+  name: "InventoryList",
 }
 </script>
 
 <style lang="scss">
-.bottom-panel {
-  width: 1500px;
-  height: 120px;
+.inventory-list{
+  width: 1080px;
+  height: 100%;
+
 
   background: #262626;
   border: 1px solid #4d4d4d;

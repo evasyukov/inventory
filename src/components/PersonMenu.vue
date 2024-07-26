@@ -1,5 +1,5 @@
 <template>
-  <div class="class"></div>
+  <div class="person-menu"></div>
 </template>
 
 <script lang="ts">
@@ -9,10 +9,14 @@ export default {
 </script>
 
 <style lang="scss">
-.class {
-  width: 200px;
-  height: 200px;
+.person-menu {
+  width: 400px;
+  height: 100%;
 
-  background-color: aqua;
+  // padding: 18px 14px 24px 14px;
+
+  background: #262626;
+  border: 1px solid #4d4d4d;
+  border-radius: 12px;
 }
 </style>
