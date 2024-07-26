@@ -1,8 +1,7 @@
 <template>
-<div class="inventory-list">
+  <div class="inventory-list">
 
-</div>
-
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,10 +11,9 @@ export default {
 </script>
 
 <style lang="scss">
-.inventory-list{
+.inventory-list {
   width: 1080px;
   height: 100%;
-
 
   background: #262626;
   border: 1px solid #4d4d4d;

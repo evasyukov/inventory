@@ -1,12 +1,15 @@
 <template>
   <div class="inventory-menu">
+
+    <!-- Основной контент страницы -->
     <div class="inventory-menu_main">
-      <PersonMenu></PersonMenu>
-      <InventoryList></InventoryList>
+      <PersonMenu />
+      <InventoryList />
     </div>
 
+    <!-- Нижняя панель -->
     <div class="inventory-menu_bottom">
-      <BottomPanel></BottomPanel>
+      <BottomPanel />
     </div>
   </div>
 </template>
@@ -45,7 +48,7 @@ export default {
     margin-top: 32px;
   }
 
-  &_bottom{
+  &_bottom {
     margin: 32px;
     // height: 100%;
   }
