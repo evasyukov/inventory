@@ -1,6 +1,6 @@
 <template>
   <div class="inventory-list">
-
+    
   </div>
 </template>
 
@@ -17,6 +17,6 @@ export default {
 
   background: #262626;
   border: 1px solid #4d4d4d;
-  border-radius: 12px;
+  border-radius: 20px;
 }
 </style>

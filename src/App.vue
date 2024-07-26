@@ -3,7 +3,11 @@
 
     <!-- Основной контент страницы -->
     <div class="inventory-menu_main">
+      
+      <!-- Блок "персонажа" -->
       <PersonMenu />
+
+      <!-- Инвентарь -->
       <InventoryList />
     </div>
 

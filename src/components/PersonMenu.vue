@@ -44,7 +44,7 @@ export default {
       width: 300px;
       height: auto;
 
-      border-radius: 12px;
+      border-radius: 20px;
 
       background-size: cover;
       background-position: center;
@@ -67,7 +67,7 @@ export default {
       margin: auto;
       margin-bottom: 23px;
 
-      border-radius: 9px;
+      border-radius: 12px;
       background: linear-gradient(
         90deg,
         #3c3c3c 0%,
