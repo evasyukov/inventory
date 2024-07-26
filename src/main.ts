@@ -5,6 +5,6 @@ import App from './App.vue'
 
 import './style.css'
 
-const pinia = createPinia
+const pinia = createPinia()
 
 createApp(App).use(pinia).mount('#app')
