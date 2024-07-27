@@ -3,7 +3,7 @@
     <!-- ячейка предмета -->
     <div
       class="inventory-list_cell"
-      v-for="(item, index) in items"
+      v-for="(item, index) in extendedItems"
       :key="index"
     >
       <Item :item="item" @open="openModal" />
@@ -30,6 +30,14 @@ export default {
     const storeItems = useStoreItems()
     const items = computed(() => storeItems.items)
 
+    const extendedItems = computed(() => {
+      let extended = [...items.value]
+      while (extended.length < 25) {
+        extended.push({ /* Здесь могут быть пустые свойства, если требуется */ })
+      }
+      return extended;
+    })
+
     const showModal = ref(false)
 
     const openModal = () => {
@@ -41,6 +49,7 @@ export default {
     }
 
     return {
+      extendedItems,
       items,
       showModal,
       openModal,
