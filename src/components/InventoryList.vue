@@ -16,11 +16,8 @@
 <script lang="ts">
 import { ref, computed } from "vue"
 
-import { ref, computed } from "vue"
-
 import Item from "./Item.vue"
 import ModalItem from "./ModalItem.vue"
-import { useStoreItems } from "../stores/storeItems.ts"
 import { useStoreItems } from "../stores/storeItems.ts"
 
 export default {
@@ -74,18 +71,6 @@ export default {
     border: 1px solid #4d4d4d;
 
     flex: 1 0 auto;
-  }
-
-  &_counter {
-    width: 16px;
-    height: 16px;
-
-    border: 1px solid #4d4d4d;
-    border-radius: 12px 0 0 0;
-
-    position: absolute;
-    bottom: 0;
-    left: 2px;
   }
 
   &_counter {

@@ -14,8 +14,6 @@
 <script lang="ts">
 // @ts-ignore
 import { defineProps } from "vue"
-// @ts-ignore
-import { defineProps } from "vue"
 import ModalItem from "./ModalItem.vue"
 
 export default {
@@ -23,17 +21,6 @@ export default {
   components: {
     ModalItem,
   },
-  props: {
-    item: Object,
-  },
-  setup(_, { emit }) {
-    const openModal = () => {
-      emit("open")
-    }
-
-    return {
-      openModal,
-    }
   props: {
     item: Object,
   },
@@ -53,8 +40,6 @@ export default {
 .item {
   width: 100%;
   height: 100%;
-
-  position: relative;
 
   position: relative;
 
@@ -83,30 +68,10 @@ export default {
     align-items: center;
   }
 
-  &_counter {
-    width: 24px;
-    height: 24px;
-
-    border: 1px solid #4d4d4d;
-    border-radius: 12px 0 0 0;
-
-    position: absolute;
-    bottom: 0;
-    right: 0;
-
-    font-size: 12px;
-    color: #ffffff40;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   &_first {
     width: 70px;
     height: 70px;
 
-    // background-color: #aa9765;
     // background-color: #aa9765;
   }
 
@@ -120,7 +85,6 @@ export default {
 
     z-index: 1;
 
-    // background-color: #d9bb985a;
     // background-color: #d9bb985a;
     backdrop-filter: blur(12px);
   }
