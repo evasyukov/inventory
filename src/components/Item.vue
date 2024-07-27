@@ -1,10 +1,19 @@
 <template>
   <div class="item" @click="openModal">
-    <div class="item_first"><div class="item_second"></div></div>
+    <div class="item_first" :style="{ backgroundColor: item.color_first }">
+      <div
+        class="item_second"
+        :style="{ backgroundColor: item.color_second }"
+      ></div>
+    </div>
+
+    <div class="item_counter">{{ item.counter }}</div>
   </div>
 </template>
 
 <script lang="ts">
+// @ts-ignore
+import { defineProps } from "vue"
 import ModalItem from "./ModalItem.vue"
 
 export default {
@@ -12,11 +21,17 @@ export default {
   components: {
     ModalItem,
   },
-  methods: {
-    // метод открытия модального окна
-    openModal() {
-      this.$emit("open")
-    },
+  props: {
+    item: Object,
+  },
+  setup(_, { emit }) {
+    const openModal = () => {
+      emit("open")
+    }
+
+    return {
+      openModal,
+    }
   },
 }
 </script>
@@ -26,17 +41,38 @@ export default {
   width: 100%;
   height: 100%;
 
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   cursor: pointer;
 
+  &_counter {
+    width: 24px;
+    height: 24px;
+
+    border: 1px solid #4d4d4d;
+    border-radius: 12px 0 0 0;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    font-size: 12px;
+    color: #ffffff40;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &_first {
     width: 70px;
     height: 70px;
 
-    background-color: rgba(170, 151, 101, 1);
+    // background-color: #aa9765;
   }
 
   &_second {
@@ -49,7 +85,7 @@ export default {
 
     z-index: 1;
 
-    background-color: rgba(217, 187, 152, 0.35);
+    // background-color: #d9bb985a;
     backdrop-filter: blur(12px);
   }
 }

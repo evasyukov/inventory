@@ -31,7 +31,12 @@
       <!-- блок удаления предмета -->
       <div class="delete-block" v-if="showDeleteItem">
         <div class="delete-block_counter">
-          <input id="counter_item" type="number" placeholder="Введите количество" min="0" />
+          <input
+            id="counter_item"
+            type="number"
+            placeholder="Введите количество"
+            min="0"
+          />
         </div>
 
         <div class="delete-block_button">
@@ -46,22 +51,28 @@
 </template>
 
 <script scoped lang="ts">
+import { ref } from "vue"
+
 export default {
+  name: "ModalItem",
   props: ["visible_modal"],
-  data() {
-    return {
-      showDeleteItem: false,
+  // @ts-ignore
+  setup(props, { emit }) {
+    const showDeleteItem = ref(false)
+
+    const closeModal = () => {
+      emit("close")
     }
-  },
-  methods: {
-    // закрытие окна
-    closeModal() {
-      this.$emit("close")
-    },
-    // открытие/закрытие блока с удалением предмета
-    deleteItem() {
-      this.showDeleteItem = !this.showDeleteItem
-    },
+
+    const deleteItem = () => {
+      showDeleteItem.value = !showDeleteItem.value
+    }
+
+    return {
+      showDeleteItem,
+      deleteItem,
+      closeModal,
+    }
   },
 }
 </script>
@@ -94,7 +105,7 @@ export default {
   border-radius: 0 12px 12px 0;
   border: 1px solid #4d4d4d;
 
-  animation: 0s ease-out 0s 1 slideInFromRight;
+  animation: 0.7s ease-out 0s 1 slideInFromRight;
 
   background-color: #2626268a;
   backdrop-filter: blur(16px);
@@ -276,7 +287,6 @@ export default {
       &-delete {
         background-color: #fa7272;
         color: #fff;
-
       }
     }
   }
