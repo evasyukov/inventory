@@ -1,8 +1,7 @@
 <template>
-  <div class="item" @click="openModal()">
+  <div class="item" @click="openModal">
     <div class="item_first"><div class="item_second"></div></div>
   </div>
-  <ModalItem :isVisible="showModal" @close="closeModal" />
 </template>
 
 <script lang="ts">
@@ -13,17 +12,10 @@ export default {
   components: {
     ModalItem,
   },
-  data() {
-    return {
-      showModal: true,
-    }
-  },
   methods: {
+    // метод открытия модального окна
     openModal() {
-      this.showModal = true
-    },
-    closeModal() {
-      this.showModal = false
+      this.$emit('open')
     },
   },
 }

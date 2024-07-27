@@ -1,19 +1,37 @@
 <template>
   <div class="inventory-list">
+
     <div class="inventory-list_cell" v-for="n in 25" :key="n">
-      <Item v-if="n < 4" />
+      <Item @open="openModal" v-if="n < 4" />
     </div>
+
+    <ModalItem :isVisible="showModal" @close="closeModal" />
   </div>
 </template>
 
 <script lang="ts">
 import Item from "./Item.vue"
+import ModalItem from "./ModalItem.vue"
 
 export default {
   name: "InventoryList",
 
   components: {
     Item,
+    ModalItem,
+  },
+  data() {
+    return {
+      showModal: true,
+    }
+  },
+  methods: {
+    openModal() {
+      this.showModal = true
+    },
+    closeModal() {
+      this.showModal = false
+    },
   },
 }
 </script>
@@ -25,6 +43,8 @@ export default {
 
   display: flex;
   flex-wrap: wrap;
+
+  position: relative;
 
   background: #262626;
   border: 1px solid #4d4d4d;
