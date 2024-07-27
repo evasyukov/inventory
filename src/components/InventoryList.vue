@@ -1,11 +1,10 @@
 <template>
   <div class="inventory-list">
-
     <div class="inventory-list_cell" v-for="n in 25" :key="n">
       <Item @open="openModal" v-if="n < 4" />
     </div>
 
-    <ModalItem :isVisible="showModal" @close="closeModal" />
+    <ModalItem :visible_modal="showModal" @close="closeModal" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="modal-backdrop">
+  <div v-if="visible_modal" class="modal-backdrop">
     <div class="modal">
       <!-- кнопка закрытия окна -->
       <div class="modal_close-button" @click="closeModal">
@@ -24,9 +24,21 @@
       </div>
 
       <!-- кнопка удалить предмет -->
-      <div class="modal_delete">
-        <div class="modal_delete-button">
-          <span>Удалить предмет</span>
+      <div class="modal_delete" @click="deleteItem">
+        <span>Удалить предмет</span>
+      </div>
+
+      <!-- блок удаления предмета -->
+      <div class="delete-block" v-if="showDeleteItem">
+        <div class="delete-block_counter">
+          <input id="counter_item" type="number" placeholder="Введите количество" min="0" />
+        </div>
+
+        <div class="delete-block_button">
+          <button class="delete-block_button-undo" @click="deleteItem">
+            Отмена
+          </button>
+          <button class="delete-block_button-delete">Потвердить</button>
         </div>
       </div>
     </div>
@@ -35,10 +47,20 @@
 
 <script scoped lang="ts">
 export default {
-  props: ["isVisible"],
+  props: ["visible_modal"],
+  data() {
+    return {
+      showDeleteItem: false,
+    }
+  },
   methods: {
+    // закрытие окна
     closeModal() {
       this.$emit("close")
+    },
+    // открытие/закрытие блока с удалением предмета
+    deleteItem() {
+      this.showDeleteItem = !this.showDeleteItem
     },
   },
 }
@@ -66,6 +88,7 @@ export default {
 .modal {
   width: 400px;
   height: 95%;
+  position: relative;
 
   padding: 20px;
   border-radius: 0 12px 12px 0;
@@ -172,19 +195,90 @@ export default {
     width: 100%;
     height: 40px;
 
+    border-radius: 12px;
     margin: 22px 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    // height: 50%;
-
     background-color: #fa7272;
     color: #fff;
 
-    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .delete-block {
+    width: 100%;
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+
+    position: absolute;
+    bottom: 4px;
+    right: -1px;
+
+    background-color: #262626;
+    border: 1px solid #4d4d4d;
+
+    border-radius: 0 0 12px 0;
+
+    &_counter {
+      input {
+        width: 350px;
+        height: 60px;
+
+        font-size: 24px;
+
+        background-color: transparent;
+        color: #fff;
+
+        border: 1px solid #4d4d4d;
+        border-radius: 5px;
+
+        outline: none;
+      }
+    }
+
+    &_button {
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      button {
+        width: 168px;
+        height: 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 20px;
+
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+
+        box-shadow: 0px 0px 20px 3px #fa7272;
+      }
+
+      &-undo {
+        background-color: #fff;
+        color: #000;
+      }
+      &-delete {
+        background-color: #fa7272;
+        color: #fff;
+
+      }
+    }
   }
 }
 </style>

@@ -15,7 +15,7 @@ export default {
   methods: {
     // метод открытия модального окна
     openModal() {
-      this.$emit('open')
+      this.$emit("open")
     },
   },
 }
