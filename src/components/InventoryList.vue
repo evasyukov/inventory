@@ -76,7 +76,7 @@ export default {
       itemId: number
       newCount: number
     }) => {
-      storeItems.decreaseItemCounter(itemId, newCount)
+      storeItems.deleteItemInventory(itemId, newCount)
     }
 
     return {

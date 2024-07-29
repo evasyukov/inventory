@@ -43,7 +43,7 @@ export const useStoreItems = defineStore("storeItems", {
   }),
   actions: {
     // удаление предмета
-    decreaseItemCounter(itemId: number, newCount: number): void {
+    deleteItemInventory(itemId: number, newCount: number): void {
       const itemIndex = this.items.findIndex((item) => item.id === itemId)
       if (itemIndex !== -1 && newCount >= 0) {
         this.items[itemIndex].counter = newCount
