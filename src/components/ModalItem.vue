@@ -71,7 +71,6 @@ export default {
     selectedItem: { type: Object, default: null },
     deleteItem: { type: Function, default: null },
   },
-  // @ts-ignore
   setup(props, { emit }) {
     const showDeleteBlock = ref(false)
 

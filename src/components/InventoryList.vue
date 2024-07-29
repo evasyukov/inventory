@@ -1,25 +1,24 @@
 <template>
   <div class="inventory-list">
     <!-- ячейка предмета -->
-    <!-- <div
-      class="inventory-list_cell"
-      v-for="(item, index) in items"
-      :key="index"
-    > -->
+
     <div
       class="inventory-list_cell"
-      v-for="(item, index) in items"
-      :key="index"
+      v-for="cell in allCells"
+      :key="cell.position"
     >
-      
-      <Item :item="item" @open="openModal" v-if="item.counter > 0"/>
-      <ModalItem
-        :delete-item="handleDeleteItem"
-        :selected-item="selectedItem"
-        :visible_modal="showModal"
-        @close="closeModal"
-      />
+
+      <Item v-if="cell.item " :item="cell.item" @open="openModal(cell.item)" />
+
+      <div v-else></div>
     </div>
+
+    <ModalItem
+      :delete-item="handleDeleteItem"
+      :selected-item="selectedItem"
+      :visible_modal="showModal"
+      @close="closeModal"
+    />
   </div>
 </template>
 
@@ -37,14 +36,30 @@ export default {
     ModalItem,
   },
   setup() {
-    const storeItems = useStoreItems()
-    const items = computed(() => storeItems.items)
+    const storeItems = useStoreItems() // стор
+    const items = computed(() => storeItems.items) // массив items
+
+    // массив всех ячеек
+    const allCells = computed(() => {
+      const cells = []
+
+      for (let i = 1; i <= 25; i++) {
+        const cell = { position: i }
+        const item = items.value.find((item) => item.id === i)
+        if (item) {
+          // @ts-ignore
+          cell.item = item
+        }
+        cells.push(cell)
+      }
+      return cells
+    })
 
     const selectedItem: any = ref(null) // выбранная ячейка
     const showModal = ref(false) // состояние модального окна ячейки
-    // @ts-ignore
+
     // открытие модального окна и передача item в него
-    const openModal = (item) => {
+    const openModal = (item: Object) => {
       showModal.value = true
       selectedItem.value = item
     }
@@ -54,7 +69,13 @@ export default {
     }
 
     // удаление предмета
-    const handleDeleteItem = ({ itemId, newCount, }: { itemId: number, newCount: number }) => {
+    const handleDeleteItem = ({
+      itemId,
+      newCount,
+    }: {
+      itemId: number
+      newCount: number
+    }) => {
       storeItems.decreaseItemCounter(itemId, newCount)
     }
 
@@ -62,6 +83,7 @@ export default {
       items,
       showModal,
       selectedItem,
+      allCells,
       openModal,
       closeModal,
       handleDeleteItem,

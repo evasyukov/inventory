@@ -21,6 +21,24 @@ export const useStoreItems = defineStore("storeItems", {
         color_first: "#656CAA",
         color_second: "rgb(116 129 237 / 35%)",
       },
+      {
+        id: 4,
+        counter: 9,
+        color_first: "#AA6965",
+        color_second: "rgb(149 72 72 / 33%)",
+      },
+      {
+        id: 5,
+        counter: 7,
+        color_first: "#656CAA",
+        color_second: "rgb(116 129 237 / 35%)",
+      },
+      {
+        id: 6,
+        counter: 15,
+        color_first: "#659EAA",
+        color_second: "rgb(72 135 149 / 34%)",
+      },
     ],
   }),
   actions: {

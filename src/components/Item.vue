@@ -1,5 +1,5 @@
 <template>
-  <div class="item" @click="openModal(item)" >
+  <div class="item" @click="openModal(item)" v-if="item.counter > 0">
 
     <div class="item_first" :style="{ backgroundColor: item.color_first }">
       <div
@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts">
-// @ts-ignore
-import { defineProps } from "vue"
 import ModalItem from "./ModalItem.vue"
 
 export default {
