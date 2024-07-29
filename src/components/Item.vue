@@ -1,12 +1,13 @@
 <template>
-  <div class="item" @click="openModal">
-    <!-- :style="{ backgroundColor: item.color_first }" -->
-    <div class="item_first" :style="{ backgroundColor: item.color_first }">
+  <div class="item" @click="openModal(item)">
 
-      <!-- :style="{ backgroundColor: item.color_second }" -->
-      <div class="item_second" :style="{ backgroundColor: item.color_second }"></div>
+    <div class="item_first" :style="{ backgroundColor: item.color_first }">
+      <div
+        class="item_second"
+        :style="{ backgroundColor: item.color_second }"
+      ></div>
     </div>
-    <!-- {{ item.counter }} -->
+
     <div class="item_counter">{{ item.counter }}</div>
   </div>
 </template>
@@ -22,11 +23,11 @@ export default {
     ModalItem,
   },
   props: {
-    item: Object,
+    item: { type: Object, default: Array },
   },
   setup(_, { emit }) {
-    const openModal = () => {
-      emit("open")
+    const openModal = (item: any) => {
+      emit("open", item)
     }
 
     return {

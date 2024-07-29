@@ -8,7 +8,15 @@
 
       <!-- блок с предметом -->
       <div class="modal_item">
-        <div class="first"><div class="second"></div></div>
+        <div
+          class="item_first"
+          :style="{ backgroundColor: selectedItem.color_first }"
+        >
+          <div
+            class="item_second"
+            :style="{ backgroundColor: selectedItem.color_second }"
+          ></div>
+        </div>
       </div>
 
       <!-- блок с описанием -->
@@ -55,7 +63,10 @@ import { ref } from "vue"
 
 export default {
   name: "ModalItem",
-  props: ["visible_modal"],
+  props: {
+    visible_modal: Boolean,
+    selectedItem: { type: Object, default: Array },
+  },
   // @ts-ignore
   setup(props, { emit }) {
     const showDeleteItem = ref(false)
@@ -90,6 +101,7 @@ export default {
 .modal-backdrop {
   position: absolute;
   left: 650px;
+  top: 0px;
   z-index: 1;
 
   height: 100%;
@@ -107,8 +119,8 @@ export default {
 
   animation: 0.7s ease-out 0s 1 slideInFromRight;
 
-  background-color: #2626268a;
-  backdrop-filter: blur(16px);
+  background-color: #262626;
+  // backdrop-filter: blur(16px);
 
   &_close-button {
     width: 100%;
@@ -130,24 +142,21 @@ export default {
     justify-content: center;
     align-items: center;
 
-    .first {
+    .item_first {
       width: 150px;
       height: 150px;
-
-      background-color: rgba(170, 151, 101, 1);
     }
 
-    .second {
+    .item_second {
       width: 150px;
       height: 150px;
 
       position: relative;
-      bottom: 10px;
-      left: 10px;
+      bottom: 20px;
+      left: 20px;
 
       z-index: 1;
 
-      background-color: rgba(217, 187, 152, 0.721);
       backdrop-filter: blur(12px);
     }
   }

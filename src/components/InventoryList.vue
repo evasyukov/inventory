@@ -7,9 +7,8 @@
       :key="index"
     >
       <Item :item="item" @open="openModal" />
+      <ModalItem :selected-item="selectedItem" :visible_modal="showModal" @close="closeModal" />
     </div>
-
-    <ModalItem :visible_modal="showModal" @close="closeModal" />
   </div>
 </template>
 
@@ -30,10 +29,12 @@ export default {
     const storeItems = useStoreItems()
     const items = computed(() => storeItems.items)
 
-    const showModal = ref(false)
-
-    const openModal = () => {
+    const selectedItem: any = ref(null) // выбранная ячейка
+    const showModal = ref(false) // состояние модального окна ячейки
+    // @ts-ignore
+    const openModal = (item) => {
       showModal.value = true
+      selectedItem.value = item
     }
 
     const closeModal = () => {
@@ -43,6 +44,7 @@ export default {
     return {
       items,
       showModal,
+      selectedItem,
       openModal,
       closeModal,
     }
