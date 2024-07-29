@@ -32,14 +32,15 @@
       </div>
 
       <!-- кнопка удалить предмет -->
-      <div class="modal_delete" @click="deleteItem">
+      <div class="modal_delete" @click="deleteBlock">
         <span>Удалить предмет</span>
       </div>
 
       <!-- блок удаления предмета -->
-      <div class="delete-block" v-if="showDeleteItem">
+      <div class="delete-block" v-if="showDeleteBlock">
         <div class="delete-block_counter">
           <input
+            required
             id="counter_item"
             type="number"
             placeholder="Введите количество"
@@ -48,41 +49,61 @@
         </div>
 
         <div class="delete-block_button">
-          <button class="delete-block_button-undo" @click="deleteItem">
+          <button class="delete-block_button-undo" @click="deleteBlock">
             Отмена
           </button>
-          <button class="delete-block_button-delete">Потвердить</button>
+          <button class="delete-block_button-delete" @click="deleteItem">
+            Потвердить
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script scoped lang="ts">
+<script lang="ts">
 import { ref } from "vue"
 
 export default {
   name: "ModalItem",
   props: {
     visible_modal: Boolean,
-    selectedItem: { type: Object, default: Array },
+    selectedItem: { type: Object, default: null },
+    deleteItem: { type: Function, default: null },
   },
   // @ts-ignore
   setup(props, { emit }) {
-    const showDeleteItem = ref(false)
+    const showDeleteBlock = ref(false)
 
     const closeModal = () => {
       emit("close")
     }
 
+    const deleteBlock = () => {
+      showDeleteBlock.value = !showDeleteBlock.value
+    }
+
+    // Добавляем метод deleteItem
     const deleteItem = () => {
-      showDeleteItem.value = !showDeleteItem.value
+      // @ts-ignore
+      let inputCount: number = document.getElementById("counter_item")?.value
+      const newCount: number = props.selectedItem.counter - inputCount
+
+      if (inputCount > 0) {
+        props.deleteItem({
+          itemId: props.selectedItem.id,
+          newCount: newCount,
+        })
+
+        deleteBlock()
+      }
     }
 
     return {
-      showDeleteItem,
-      deleteItem,
+      showDeleteBlock,
+      deleteBlock,
       closeModal,
+      deleteItem,
     }
   },
 }
@@ -136,7 +157,7 @@ export default {
   }
 
   &_item {
-    height: 300px;
+    height: 280px;
 
     display: flex;
     justify-content: center;
@@ -216,7 +237,7 @@ export default {
     height: 40px;
 
     border-radius: 12px;
-    margin: 22px 0;
+    margin: 27px 0;
 
     display: flex;
     justify-content: center;

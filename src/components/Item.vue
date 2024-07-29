@@ -1,5 +1,5 @@
 <template>
-  <div class="item" @click="openModal(item)">
+  <div class="item" @click="openModal(item)" >
 
     <div class="item_first" :style="{ backgroundColor: item.color_first }">
       <div
@@ -8,7 +8,7 @@
       ></div>
     </div>
 
-    <div class="item_counter">{{ item.counter }}</div>
+    <div class="item_counter" >{{ item.counter }}</div>
   </div>
 </template>
 

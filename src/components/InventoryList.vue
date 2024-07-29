@@ -1,13 +1,24 @@
 <template>
   <div class="inventory-list">
     <!-- ячейка предмета -->
+    <!-- <div
+      class="inventory-list_cell"
+      v-for="(item, index) in items"
+      :key="index"
+    > -->
     <div
       class="inventory-list_cell"
       v-for="(item, index) in items"
       :key="index"
     >
-      <Item :item="item" @open="openModal" />
-      <ModalItem :selected-item="selectedItem" :visible_modal="showModal" @close="closeModal" />
+      
+      <Item :item="item" @open="openModal" v-if="item.counter > 0"/>
+      <ModalItem
+        :delete-item="handleDeleteItem"
+        :selected-item="selectedItem"
+        :visible_modal="showModal"
+        @close="closeModal"
+      />
     </div>
   </div>
 </template>
@@ -32,13 +43,19 @@ export default {
     const selectedItem: any = ref(null) // выбранная ячейка
     const showModal = ref(false) // состояние модального окна ячейки
     // @ts-ignore
+    // открытие модального окна и передача item в него
     const openModal = (item) => {
       showModal.value = true
       selectedItem.value = item
     }
-
+    // закрытие модального окна
     const closeModal = () => {
       showModal.value = false
+    }
+
+    // удаление предмета
+    const handleDeleteItem = ({ itemId, newCount, }: { itemId: number, newCount: number }) => {
+      storeItems.decreaseItemCounter(itemId, newCount)
     }
 
     return {
@@ -47,6 +64,7 @@ export default {
       selectedItem,
       openModal,
       closeModal,
+      handleDeleteItem,
     }
   },
 }
