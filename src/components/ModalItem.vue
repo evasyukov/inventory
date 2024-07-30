@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible_modal" class="modal-backdrop">
+  <div v-if="visible_modal && selectedItem.counter > 0" class="modal-backdrop">
     <div class="modal">
       <!-- кнопка закрытия окна -->
       <div class="modal_close-button" @click="closeModal">

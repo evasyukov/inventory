@@ -45,7 +45,7 @@ export default {
     ModalItem,
   },
   setup() {
-    const itemRefs = ref([]);
+    const itemRefs = ref([])
     const storeItems = useStoreItems() // стор
     const items = computed(() => storeItems.items) // массив items
 
@@ -79,22 +79,17 @@ export default {
     }
 
     // удаление предмета
-    const handleDeleteItem = ({
-      itemId,
-      newCount,
-    }: {
-      itemId: number
-      newCount: number
-    }) => {
+    const handleDeleteItem = ({ itemId, newCount, }: { itemId: number, newCount: number }) => {
       storeItems.deleteItemInventory(itemId, newCount)
+      localStorage.setItem("items", JSON.stringify(items.value))
     }
-
 
     let draggableElements
 
     onMounted(async () => {
       await nextTick()
 
+      // drag drop
       draggableElements = document.querySelectorAll(".item_block")
       if (itemRefs.value.length > 0) {
         new Draggable(itemRefs.value, {
@@ -130,7 +125,6 @@ export default {
   width: 1090px;
   height: 100%;
 
-
   display: flex;
   flex-wrap: wrap;
 
@@ -139,8 +133,6 @@ export default {
   background: #262626;
   border: 1px solid #4d4d4d;
   border-radius: 20px;
-
-
 
   &_cell {
     width: 200px;
