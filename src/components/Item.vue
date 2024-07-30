@@ -54,7 +54,7 @@ export default {
 
     border: 1px solid #4d4d4d;
     border-radius: 12px 0 0 0;
-
+    user-select: none;
     position: absolute;
     bottom: 0;
     right: 0;

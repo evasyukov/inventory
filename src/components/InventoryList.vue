@@ -6,9 +6,17 @@
       class="inventory-list_cell"
       v-for="cell in allCells"
       :key="cell.position"
+      @dragover.prevent
+      @dragenter.prevent
     >
-
-      <Item v-if="cell.item " :item="cell.item" @open="openModal(cell.item)" />
+      <Item
+        class="item_block"
+        ref="itemRefs"
+        draggable="true"
+        v-if="cell.item"
+        :item="cell.item"
+        @open="openModal(cell.item)"
+      />
 
       <div v-else></div>
     </div>
@@ -23,7 +31,8 @@
 </template>
 
 <script lang="ts">
-import { ref, computed } from "vue"
+import { ref, computed, onMounted, nextTick } from "vue"
+import { Draggable } from "@shopify/draggable"
 
 import Item from "./Item.vue"
 import ModalItem from "./ModalItem.vue"
@@ -36,10 +45,11 @@ export default {
     ModalItem,
   },
   setup() {
+    const itemRefs = ref([]);
     const storeItems = useStoreItems() // стор
     const items = computed(() => storeItems.items) // массив items
 
-    // массив всех ячеек
+    // отрисовка всех ячеек
     const allCells = computed(() => {
       const cells = []
 
@@ -79,7 +89,30 @@ export default {
       storeItems.deleteItemInventory(itemId, newCount)
     }
 
+
+    let draggableElements
+
+    onMounted(async () => {
+      await nextTick()
+
+      draggableElements = document.querySelectorAll(".item_block")
+      if (itemRefs.value.length > 0) {
+        new Draggable(itemRefs.value, {
+          // @ts-ignore
+          group: ".inventory-list_cell",
+          animationDuration: 150,
+          onStart(event: DragEvent) {
+            console.log("Перетаскивание начато", event)
+          },
+          onEnd(event: DragEvent) {
+            console.log("Перетаскивание закончено", event)
+          },
+        })
+      }
+    })
+
     return {
+      draggableElements,
       items,
       showModal,
       selectedItem,
@@ -97,6 +130,7 @@ export default {
   width: 1090px;
   height: 100%;
 
+
   display: flex;
   flex-wrap: wrap;
 
@@ -106,6 +140,8 @@ export default {
   border: 1px solid #4d4d4d;
   border-radius: 20px;
 
+
+
   &_cell {
     width: 200px;
     height: 147px;
@@ -113,6 +149,19 @@ export default {
     border: 1px solid #4d4d4d;
 
     flex: 1 0 auto;
+  }
+
+  &_cell:nth-child(1) {
+    border-radius: 20px 0 0;
+  }
+  &_cell:nth-child(5) {
+    border-radius: 0 20px 0 0;
+  }
+  &_cell:nth-child(21) {
+    border-radius: 0 0 0 20px;
+  }
+  &_cell:nth-child(25) {
+    border-radius: 0 0 20px 0;
   }
 
   &_counter {
