@@ -38,6 +38,11 @@ import Item from "./Item.vue"
 import ModalItem from "./ModalItem.vue"
 import { useStoreItems } from "../stores/storeItems.ts"
 
+interface Cell {
+  position: number
+  item?: any
+}
+
 export default {
   name: "InventoryList",
   components: {
@@ -50,8 +55,8 @@ export default {
     const items = computed(() => storeItems.items) // массив items
 
     // отрисовка всех ячеек
-    const allCells = computed(() => {
-      const cells = []
+    const allCells = computed<Cell[]>(() => {
+      const cells: Cell[] = []
 
       for (let i = 1; i <= 25; i++) {
         const cell = { position: i }
