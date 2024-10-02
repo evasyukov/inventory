@@ -1,5 +1,10 @@
 # Тестовое задание в компанию RLT
 
-`npm install` установка зависимостей
+Установка
+Клонируйте репозиторий: `git clone https://github.com/evasyukov/inventory.git`
 
-`npm run dev` запуск проекта
+Перейдите в директорию проекта: `cd inventory`
+
+Установите зависимости: `npm install`
+
+Запустите dev-сервер: `npm run dev`
