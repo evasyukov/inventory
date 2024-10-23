@@ -1,11 +1,17 @@
 <template>
   <div class="inventory-list">
+
     <!-- ячейка предмета -->
-    <div v-for="item in 25" :key="item" class="inventory-list_cell"></div>
+    <div v-for="item in 25" :key="item" class="inventory-list_cell">
+      <Item />
+    </div>
+    
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Item from "./Item.vue"
+</script>
 
 <style lang="scss" scoped>
 .inventory-list {
@@ -16,7 +22,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0px;
-  
+
   position: relative;
   border-radius: 20px;
 
