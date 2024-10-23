@@ -1,9 +1,12 @@
 <template>
-  <div class="item" v-if="item.counter > 0">
+  <div class="item" @click="openModal(item)" v-if="item.counter > 0">
 
     <!-- Предмет  -->
     <div class="item_first" :style="{ backgroundColor: item.color_first }">
-      <div class="item_second" :style="{ backgroundColor: item.color_second }"></div>
+      <div
+        class="item_second"
+        :style="{ backgroundColor: item.color_second }"
+      ></div>
     </div>
 
     <!-- Количество предметов -->
@@ -15,6 +18,12 @@
 const props = defineProps({
   item: { type: Object, default: Array },
 })
+
+const emit = defineEmits(["open"])
+
+const openModal = (item) => {
+  emit("open", item)
+}
 </script>
 
 <style lang="scss" scoped>

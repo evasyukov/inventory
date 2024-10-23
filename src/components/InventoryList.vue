@@ -1,6 +1,5 @@
 <template>
   <div class="inventory-list">
-
     <!-- ячейка предмета -->
     <div
       class="inventory-list_cell"
@@ -11,11 +10,14 @@
         v-if="cell.item"
         :key="cell.item.id"
         :item="cell.item"
-        />
+        @open="openModal(cell.item)"
+      />
 
-        <div v-else></div>
+      <div v-else></div>
     </div>
 
+    <!-- модальное окно -->
+    <ModalItem :visible_modal="showModal" :selected-item="selectedItem" />
   </div>
 </template>
 
@@ -25,6 +27,7 @@ import { ref, computed } from "vue"
 
 // компоненты
 import Item from "./Item.vue"
+import ModalItem from "./ModalItem.vue"
 
 // store
 import { useStoreItems } from "../store/storeItems"
@@ -33,7 +36,7 @@ const storeItems = useStoreItems() // store
 const items = computed(() => storeItems.items) // array предметов
 
 const allCells = computed(() => {
-    const cells = []
+  const cells = []
 
   for (let i = 1; i <= 25; i++) {
     const cell = { position: i }
@@ -47,6 +50,16 @@ const allCells = computed(() => {
 
   return cells
 })
+
+// переменные для модального окна
+const selectedItem = ref(null) // выбранная ячейка
+const showModal = ref(false) // состояние модального окна ячейки
+
+// открытие модального окна и передача item в него
+const openModal = (item) => {
+  showModal.value = true
+  selectedItem.value = item
+}
 </script>
 
 <style lang="scss" scoped>
