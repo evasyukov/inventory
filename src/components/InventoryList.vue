@@ -5,6 +5,7 @@
     <div class="inventory-list_cell">
 
     </div>
+
   </div>
 </template>
 
@@ -13,7 +14,7 @@
 <style lang="scss" scoped>
 .inventory-list {
   width: 1090px;
-  height: 100%;
+  height: 750px;
 
   display: flex;
   flex-wrap: wrap;

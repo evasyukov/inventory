@@ -2,7 +2,7 @@
   <div class="person-menu">
     <!-- Блок с аватаром -->
     <div class="person-menu_avatar">
-      <img src="../assets/avatar.jpg" alt="" />
+      <img src="../assets/cat.jpg" alt="" />
     </div>
 
     <!-- Блок с текстом -->
@@ -18,7 +18,7 @@
 <style lang="scss" scoped>
 .person-menu {
   width: 400px;
-  height: 100%;
+  height: 750px;
 
   display: flex;
   flex-direction: column;
