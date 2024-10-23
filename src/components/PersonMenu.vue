@@ -12,8 +12,7 @@
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .person-menu {
@@ -59,11 +58,13 @@
       margin-bottom: 23px;
 
       border-radius: 12px;
+      background: rgb(243, 193, 111);
       background: linear-gradient(
         90deg,
-        #3c3c3c 0%,
-        #444444 51.04%,
-        #333333 100%
+        #f3c06f8a 0%,
+        #444444 40%,
+        #444444 55%,
+        #f3c06f8e 100%
       );
     }
     .skeletons:nth-child(1) {

@@ -1,16 +1,21 @@
 <template>
-  <div class="item">
+  <div class="item" v-if="item.counter > 0">
+
     <!-- Предмет  -->
-    <div class="item_first">
-      <div class="item_second"></div>
+    <div class="item_first" :style="{ backgroundColor: item.color_first }">
+      <div class="item_second" :style="{ backgroundColor: item.color_second }"></div>
     </div>
 
     <!-- Количество предметов -->
-    <div class="item_counter">2</div>
+    <div class="item_counter">{{ item.counter }}</div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  item: { type: Object, default: Array },
+})
+</script>
 
 <style lang="scss" scoped>
 .item {

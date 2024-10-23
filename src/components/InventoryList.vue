@@ -2,15 +2,51 @@
   <div class="inventory-list">
 
     <!-- ячейка предмета -->
-    <div v-for="item in 25" :key="item" class="inventory-list_cell">
-      <Item />
+    <div
+      class="inventory-list_cell"
+      v-for="cell in allCells"
+      :key="cell.position"
+    >
+      <Item
+        v-if="cell.item"
+        :key="cell.item.id"
+        :item="cell.item"
+        />
+
+        <div v-else></div>
     </div>
-    
+
   </div>
 </template>
 
 <script setup>
+// vue
+import { ref, computed } from "vue"
+
+// компоненты
 import Item from "./Item.vue"
+
+// store
+import { useStoreItems } from "../store/storeItems"
+
+const storeItems = useStoreItems() // store
+const items = computed(() => storeItems.items) // array предметов
+
+const allCells = computed(() => {
+    const cells = []
+
+  for (let i = 1; i <= 25; i++) {
+    const cell = { position: i }
+    const item = items.value.find((item) => item.id === i)
+    if (item) {
+      cell.position = item.id
+      cell.item = item
+    }
+    cells.push(cell)
+  }
+
+  return cells
+})
 </script>
 
 <style lang="scss" scoped>
@@ -28,6 +64,7 @@ import Item from "./Item.vue"
 
   &_cell {
     width: 210px;
+    height: 150px;
     background: #262626;
     border: 1px solid #4d4d4d;
   }
