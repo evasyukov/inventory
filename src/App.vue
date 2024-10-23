@@ -6,6 +6,7 @@
       <PersonMenu />
 
       <!-- Инвентарь -->
+      <InventoryList />
     </div>
 
     <!-- Нижняя панель -->
@@ -15,9 +16,10 @@
 
 <script setup>
 import PersonMenu from "./components/PersonMenu.vue"
+import InventoryList from "./components/InventoryList.vue"
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .inventory-menu {
   display: flex;
   flex-direction: column;
