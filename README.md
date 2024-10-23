@@ -11,7 +11,7 @@
 ## Стек
 - Vue3 Composition API
 - SCSS
-- TypeScript
+- JavaScript
 - Pinia
 
 ## Установка
