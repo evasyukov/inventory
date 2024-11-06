@@ -1,10 +1,7 @@
 <template>
   <div v-if="visible_modal && selectedItem.counter > 0" class="modal-backdrop">
     <div class="modal">
-      <!-- кнопка закрытия окна -->
-      <div class="modal_close-button" @click="closeModal">
-        <img src="../assets/close.svg" alt="" />
-      </div>
+
 
       <!-- блок с предметом -->
       <div class="modal_item">
@@ -65,10 +62,7 @@ const props = defineProps({
   selectedItem: { type: Object, default: null },                    // выбранный предмет
 })
 
-// закрытие модального окна
-const closeModal = () => {
-  emit("close")
-}
+
 
 
 </script>
