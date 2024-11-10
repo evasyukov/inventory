@@ -19,3 +19,6 @@
 - Перейдите в директорию проекта: `cd inventory`
 - Установите зависимости: `npm install`
 - Запустите dev-сервер: `npm run dev`
+
+### Превью проекта
+![image](https://github.com/user-attachments/assets/d36ccc67-8914-465e-bf99-d80ff6e12dca)
