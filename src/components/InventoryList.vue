@@ -17,7 +17,12 @@
     </div>
 
     <!-- модальное окно -->
-    <ModalItem :visible_modal="showModal" :selected-item="selectedItem" />
+    <ModalItem
+      :delete-item="handleDeleteItem"
+      :visible_modal="showModal"
+      :selected-item="selectedItem"
+      @close="closeModal"
+    />
   </div>
 </template>
 
@@ -59,6 +64,16 @@ const showModal = ref(false) // состояние модального окна
 const openModal = (item) => {
   showModal.value = true
   selectedItem.value = item
+}
+
+const closeModal = () => {
+  showModal.value = false
+}
+
+// удаление предмета
+const handleDeleteItem = ({ itemId, newCount }) => {
+  storeItems.deleteItemInventory(itemId, newCount)
+  // localStorage.setItem("items", JSON.stringify(items.value))
 }
 </script>
 

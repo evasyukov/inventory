@@ -61,10 +61,9 @@
       background: rgb(243, 193, 111);
       background: linear-gradient(
         90deg,
-        #f3c06f8a 0%,
-        #444444 40%,
-        #444444 55%,
-        #f3c06f8e 100%
+        #3c3c3c 0%,
+        #444444 51.04%,
+        #333333 100%
       );
     }
     .skeletons:nth-child(1) {

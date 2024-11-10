@@ -1,7 +1,10 @@
 <template>
   <div v-if="visible_modal && selectedItem.counter > 0" class="modal-backdrop">
     <div class="modal">
-
+      <!-- кнопка закрытия окна -->
+      <div class="modal_close-button" @click="closeModal">
+        <img src="../assets/close.svg" alt="закрыть окно предмета" />
+      </div>
 
       <!-- блок с предметом -->
       <div class="modal_item">
@@ -25,7 +28,7 @@
       </div>
 
       <!-- кнопка удалить предмет -->
-      <div class="modal_delete" @click="deleteBlock">
+      <div class="modal_delete" @click="showDeleteBlock = true">
         <span>Удалить предмет</span>
       </div>
 
@@ -42,29 +45,58 @@
         </div>
 
         <div class="delete-block_button">
-          <button class="delete-block_button-undo" @click="deleteBlock">
-            Отмена
-          </button>
           <button class="delete-block_button-delete" @click="deleteItem">
             Потвердить
           </button>
+          <button
+            class="delete-block_button-undo"
+            @click="showDeleteBlock = false"
+          >
+            Отмена
+          </button>
         </div>
       </div>
+
+      <!-- ------ -->
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue"
+import { useStoreItems } from "../store/storeItems.js"
+
+const storeItems = useStoreItems() // стор
 
 const props = defineProps({
-  visible_modal: Boolean,                                           // открытие модального окна
-  selectedItem: { type: Object, default: null },                    // выбранный предмет
+  visible_modal: Boolean,
+  selectedItem: { type: Object, default: null },
+  deleteItem: { type: Function, default: null },
 })
+const showDeleteBlock = ref(false)
+const item = ref(props.selectedItem)
+const emit = defineEmits(["close"])
 
+// закрытие модального окна предмета
+const closeModal = () => {
+  showDeleteBlock.value = false
+  emit("close")
+}
 
+console.log(item, "-----------------------")
+const deleteItem = () => {
+  let inputCount = document.getElementById("counter_item")?.value
+  const newCount = props.selectedItem.counter - inputCount
 
+  if (inputCount > 0) {
+    props.deleteItem({
+      itemId: props.selectedItem.id,
+      newCount: newCount,
+    })
+  }
 
+  showDeleteBlock.value = false
+}
 </script>
 
 <style lang="scss">
@@ -79,19 +111,18 @@ const props = defineProps({
 
 .modal-backdrop {
   position: absolute;
-  left: 650px;
+  height: 800px;
+  right: 0px;
   top: 0px;
   z-index: 1;
-
-  height: 100%;
   overflow: hidden;
 }
 
 .modal {
   width: 400px;
-  height: 95%;
-  position: relative;
+  height: 719px;
 
+  box-shadow: 1px 1px 20px 3px #262626;
   padding: 20px;
   border-radius: 0 12px 12px 0;
   border: 1px solid #4d4d4d;
@@ -99,7 +130,6 @@ const props = defineProps({
   animation: 0.7s ease-out 0s 1 slideInFromRight;
 
   background-color: #262626;
-  // backdrop-filter: blur(16px);
 
   &_close-button {
     width: 100%;
@@ -209,18 +239,17 @@ const props = defineProps({
   }
 
   .delete-block {
-    width: 100%;
-    height: 200px;
+    width: 440px;
+    height: 170px;
 
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 
     position: absolute;
-    bottom: 4px;
-    right: -1px;
+    bottom: 40px;
+    right: 0px;
 
     background-color: #262626;
     border: 1px solid #4d4d4d;
@@ -230,9 +259,9 @@ const props = defineProps({
     &_counter {
       input {
         width: 350px;
-        height: 60px;
+        height: 50px;
 
-        font-size: 24px;
+        font-size: 20px;
 
         background-color: transparent;
         color: #fff;
@@ -241,6 +270,10 @@ const props = defineProps({
         border-radius: 5px;
 
         outline: none;
+
+        &::-webkit-inner-spin-button  {
+          -webkit-appearance: none;
+        }
       }
     }
 
@@ -264,17 +297,15 @@ const props = defineProps({
         border: none;
         border-radius: 12px;
         cursor: pointer;
-
-        box-shadow: 0px 0px 20px 3px #fa7272;
       }
 
       &-undo {
-        background-color: #fff;
+        background-color: #818181;
         color: #000;
       }
       &-delete {
-        background-color: #fa7272;
-        color: #fff;
+        background-color: #fff;
+        color: #000;
       }
     }
   }

@@ -41,4 +41,13 @@ export const useStoreItems = defineStore("storeItems", {
       },
     ],
   }),
+  actions: {
+    // удаление предмета
+    deleteItemInventory(itemId, newCount) {
+      const itemIndex = this.items.findIndex((item) => item.id === itemId)
+      if (itemIndex !== -1 && newCount >= 0) {
+        this.items[itemIndex].counter = newCount
+      }
+    },
+  },
 })
